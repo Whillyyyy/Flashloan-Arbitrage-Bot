@@ -75,7 +75,7 @@ namespace Bank2
                 try
                 {
                     con.Open();
-                    string query = "UPDATE admintable SET accpass = @APS WHERE acc_id = @ID";
+                    string query = "UPDATE `admintable` SET `adm_id`='@ID',`admname`='admin',`admpass`='password' WHERE 1";
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@APS", txtNewpass.Text);
                     cmd.Parameters.AddWithValue("@ID", 1);

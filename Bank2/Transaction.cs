@@ -48,28 +48,36 @@ namespace Bank2
         }
         private void CheckAvailableBalance()
         {
-            //con.Open();
-            string query = "SELECT * FROM accounttable WHERE accnum=" + txtFrom + "";
+            string query = "SELECT * FROM accounttable WHERE accnum = '" + txtFrom.Text + "'";
             MySqlCommand cmd = new MySqlCommand(query, con);
             DataTable dt = new DataTable();
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
-            sda.Fill(dt);
-            foreach (DataRow dr in dt.Rows)
+            sda.Fill(dt); 
+            if (dt.Rows.Count > 0)
             {
-                BalanceLabel.Text = "Peso" + dr["accbal"].ToString();
-                Balance = Convert.ToInt32(dr["accbal"].ToString());
-                blBalance.Text = "Peso" + Balance.ToString();
+                DataRow dr = dt.Rows[0];
+                BalanceLabel.Text = "Peso " + dr["accbal"].ToString();
+                blBalance.Text = "Peso " + dr["accbal"].ToString();
             }
-
-            //con.Close();   
+            else
+            {
+                BalanceLabel.Text = "No balance found for this account";
+                blBalance.Text = "";
+            }
         }
+
+        private void btnCheckBalance_Click(object sender, EventArgs e)
+        {
+            CheckAvailableBalance();
+        }
+
 
         private void Deposit()
         {
             try
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (trname,trdate,tramount,traccnum) VALUES (@TN,@TD,@TA,@TAN)", con);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (transacname,transacdate,transacamount,transacnumber) VALUES (@TN,@TD,@TA,@TAN)", con);
                 cmd.Parameters.AddWithValue("@TN", "Deposit");
                 cmd.Parameters.AddWithValue("@TD", DateTime.Now.Date);
                 cmd.Parameters.AddWithValue("@TA", Convert.ToInt32(tbDepoamount.Text));
@@ -93,7 +101,7 @@ namespace Bank2
             try
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (trname,trdate,tramount,traccnum) VALUES (@TN,@TD,@TA,@TAN)", con);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (transacname,transacdate,transacamount,transacnumber) VALUES (@TN,@TD,@TA,@TAN)", con);
                 cmd.Parameters.AddWithValue("@TN", "Withdraw");
                 cmd.Parameters.AddWithValue("@TD", DateTime.Now.Date);
                 cmd.Parameters.AddWithValue("@TA", Convert.ToInt32(txtWithamount.Text));
@@ -304,18 +312,71 @@ namespace Bank2
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            if (txtTo.Text == "" || txtFrom.Text == "" || txtTrAmount.Text == "")
+            if (string.IsNullOrEmpty(txtTo.Text) || string.IsNullOrEmpty(txtFrom.Text) || string.IsNullOrEmpty(txtTrAmount.Text))
             {
                 MessageBox.Show("Missing Information");
             }
-            else if (Convert.ToInt16(txtTrAmount.Text)>Balance)
-            {
-                MessageBox.Show("Insufficient Balance");
-            }
             else
             {
-                Transfer();
+                int accnum;
+                if (!int.TryParse(txtTo.Text, out accnum))
+                {
+                    MessageBox.Show("Invalid recipient account ID");
+                    return;
+                }
+
+                if (Convert.ToInt32(txtTrAmount.Text) > Balance)
+                {
+                    MessageBox.Show("Insufficient Balance");
+                }
+                else
+                {
+                    Transfer(accnum); 
+                }
             }
         }
+        private void Transfer(int recipientAccountId)
+        {
+            MySqlConnection con = new MySqlConnection("server=localhost;database=bank;username=root;password=;");
+
+            try
+            {
+                con.Open();
+                string deductQuery = "UPDATE accounttable SET accbal = accbal - @AT WHERE accnum = @ID";
+                MySqlCommand deductCmd = new MySqlCommand(deductQuery, con);
+                deductCmd.Parameters.AddWithValue("@AT", Convert.ToInt32(txtTrAmount.Text));
+                deductCmd.Parameters.AddWithValue("@ID", txtFrom.Text);
+                int rowsAffected = deductCmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    MessageBox.Show("Failed to deduct amount from sender's account");
+                    return;
+                }
+                string addQuery = "UPDATE accounttable SET accbal = accbal + @AT WHERE accnum = @ID";
+                MySqlCommand addCmd = new MySqlCommand(addQuery, con);
+                addCmd.Parameters.AddWithValue("@AT", Convert.ToInt32(txtTrAmount.Text));
+                addCmd.Parameters.AddWithValue("@ID", recipientAccountId);
+                rowsAffected = addCmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    MessageBox.Show("Failed to add amount to recipient's account");
+                    return;
+                }
+                MessageBox.Show("Transfer successful");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
     }
 }
