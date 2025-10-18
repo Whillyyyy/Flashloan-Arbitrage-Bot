@@ -52,7 +52,7 @@ namespace Bank2
             MySqlCommand cmd = new MySqlCommand(query, con);
             DataTable dt = new DataTable();
             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
-            sda.Fill(dt); 
+            sda.Fill(dt);
             if (dt.Rows.Count > 0)
             {
                 DataRow dr = dt.Rows[0];
@@ -77,7 +77,7 @@ namespace Bank2
             try
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (transacname,transacdate,transacamount,transacnumber) VALUES (@TN,@TD,@TA,@TAN)", con);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (trname,trdate,tramount,traccnum) VALUES (@TN,@TD,@TA,@TAN)", con);
                 cmd.Parameters.AddWithValue("@TN", "Deposit");
                 cmd.Parameters.AddWithValue("@TD", DateTime.Now.Date);
                 cmd.Parameters.AddWithValue("@TA", Convert.ToInt32(tbDepoamount.Text));
@@ -101,7 +101,7 @@ namespace Bank2
             try
             {
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (transacname,transacdate,transacamount,transacnumber) VALUES (@TN,@TD,@TA,@TAN)", con);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO transactiontable (trname,trdate,tramount,traccnum) VALUES (@TN,@TD,@TA,@TAN)", con);
                 cmd.Parameters.AddWithValue("@TN", "Withdraw");
                 cmd.Parameters.AddWithValue("@TD", DateTime.Now.Date);
                 cmd.Parameters.AddWithValue("@TA", Convert.ToInt32(txtWithamount.Text));
@@ -296,7 +296,7 @@ namespace Bank2
                 cmd.Parameters.AddWithValue("@TS", txtFrom.Text);
                 cmd.Parameters.AddWithValue("@TD", txtTo.Text);
                 cmd.Parameters.AddWithValue("@TA", txtTrAmount);
-                cmd.Parameters.AddWithValue("@TFN",DateTime.Now.Date);
+                cmd.Parameters.AddWithValue("@TFN", DateTime.Now.Date);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Money has been Transfered");
@@ -331,7 +331,7 @@ namespace Bank2
                 }
                 else
                 {
-                    Transfer(accnum); 
+                    Transfer(accnum);
                 }
             }
         }
@@ -376,7 +376,16 @@ namespace Bank2
             }
         }
 
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainMenu back = new MainMenu();
+            back.Show();
+        }
     }
 }

@@ -58,14 +58,23 @@ namespace Bank2
             {
                 panel1.BackColor = Color.Blue;
             }
-            else
+            else if (cbTheme.SelectedIndex == 2)
             {
                 panel1.BackColor = Color.Red;
+            }
+            else if (cbTheme.SelectedIndex == 3)
+            {
+                panel1.BackColor = Color.Orange;
+            }
+            else if (cbTheme.SelectedIndex == 4)
+            {
+                panel1.BackColor = Color.Green;
             }
         }
         MySqlConnection con = new MySqlConnection("server=localhost;database=bank;username=root;password=;");
         private void button1_Click(object sender, EventArgs e)
         {
+            int ID = 0;
             if (txtNewpass.Text == "")
             {
                 MessageBox.Show("Enter new password");
@@ -75,14 +84,14 @@ namespace Bank2
                 try
                 {
                     con.Open();
-                    string query = "UPDATE `admintable` SET `adm_id`='@ID',`admname`='admin',`admpass`='password' WHERE 1";
+                    string query = "UPDATE `admintable` SET `adm_id`='@id',`admname`='admin',`admpass`='password' WHERE adm_id=@id";
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@APS", txtNewpass.Text);
-                    cmd.Parameters.AddWithValue("@ID", 1);
+                    cmd.Parameters.AddWithValue("@id", ID);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Password has been Updated");
                     con.Close();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -90,6 +99,35 @@ namespace Bank2
                 }
             }
         }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainMenu back = new MainMenu();
+            back.Show();
+        }
+
+        private void cbTheme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            { 
+                txtNewpass.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtNewpass.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void txtNewpass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
-    }
+}
 

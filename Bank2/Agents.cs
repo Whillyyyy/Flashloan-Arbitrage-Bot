@@ -88,33 +88,33 @@ namespace Bank2
             }
         }
 
-            private void btnEdit_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
-                {
-                    con.Open();
-                    int selected = AgentDGV.SelectedRows[0].Index;
-                    int id = Convert.ToInt32(AgentDGV.Rows[selected].Cells["acc_id"].Value);
-                    string query = "UPDATE agenttable SET accname = @AN, accpass = @APS, accphone = @AP, accaddress = @AA WHERE acc_id = @ID";
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@AN", txtName.Text);
-                    cmd.Parameters.AddWithValue("@APS", txtPassword.Text);
-                    cmd.Parameters.AddWithValue("@AP", txtPhone.Text);
-                    cmd.Parameters.AddWithValue("@AA", txtAddress.Text);
-                    cmd.Parameters.AddWithValue("@ID", id);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Row has been Updated.");
-                    DisplayAgents();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    con.Close();
-                }
+                con.Open();
+                int selected = AgentDGV.SelectedRows[0].Index;
+                int id = Convert.ToInt32(AgentDGV.Rows[selected].Cells["acc_id"].Value);
+                string query = "UPDATE agenttable SET accname = @AN, accpass = @APS, accphone = @AP, accaddress = @AA WHERE acc_id = @ID";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AN", txtName.Text);
+                cmd.Parameters.AddWithValue("@APS", txtPassword.Text);
+                cmd.Parameters.AddWithValue("@AP", txtPhone.Text);
+                cmd.Parameters.AddWithValue("@AA", txtAddress.Text);
+                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Row has been Updated.");
+                DisplayAgents();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
@@ -189,6 +189,11 @@ namespace Bank2
         {
             Settings Obj = new Settings();
             Obj.Show();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            DisplayAgents();
         }
     }
 }

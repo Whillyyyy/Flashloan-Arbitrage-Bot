@@ -180,5 +180,17 @@ namespace Bank2
             cbEducation.Text = "";
             txtIncome.Text = "";
         }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainMenu back = new MainMenu();
+            back.Show();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            DisplayAccounts();
+        }
     }
 }

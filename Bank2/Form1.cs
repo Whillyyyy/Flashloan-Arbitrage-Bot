@@ -19,21 +19,25 @@ namespace Bank2
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
-
+            
         }
         int startP = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            startP = 0;
+            startP += 10; 
+
             Myprogress.Value = startP;
-            if(Myprogress.Value == 100)
+            if (startP >= 100)
             {
+                startP = 0;
                 Myprogress.Value = 0;
                 timer1.Stop();
+
                 Login Obj = new Login();
                 Obj.Show();
                 this.Hide();
             }
         }
+
     }
 }

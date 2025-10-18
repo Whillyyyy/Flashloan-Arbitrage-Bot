@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             Myprogress = new ProgressBar();
@@ -49,23 +49,23 @@
             guna2GradientPanel1.Controls.Add(label1);
             guna2GradientPanel1.Controls.Add(pictureBox2);
             guna2GradientPanel1.Controls.Add(pictureBox1);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges3;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges1;
             guna2GradientPanel1.FillColor = Color.Blue;
             guna2GradientPanel1.FillColor2 = Color.FromArgb(192, 255, 255);
             guna2GradientPanel1.Location = new Point(0, 0);
             guna2GradientPanel1.Margin = new Padding(3, 4, 3, 4);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2GradientPanel1.Size = new Size(679, 440);
             guna2GradientPanel1.TabIndex = 0;
             guna2GradientPanel1.Paint += guna2GradientPanel1_Paint;
             // 
             // Myprogress
             // 
-            Myprogress.Location = new Point(191, 391);
+            Myprogress.Location = new Point(217, 400);
             Myprogress.Margin = new Padding(3, 4, 3, 4);
             Myprogress.Name = "Myprogress";
-            Myprogress.Size = new Size(292, 20);
+            Myprogress.Size = new Size(224, 10);
             Myprogress.TabIndex = 5;
             Myprogress.Click += progressBar1_Click;
             // 

@@ -60,7 +60,7 @@ namespace Bank2
             try
             {
                 con.Open();
-                if (cbRole.SelectedIndex == 2)
+                if (cbRole.Text == "admin")
                 {
                     AuthenticateAdmin(username, password);
                 }
@@ -93,7 +93,7 @@ namespace Bank2
                 {
                     Agents obj = new Agents();
                     obj.Show();
-                    Hide();
+                    this.Hide();
                 }
                 else
                 {
@@ -115,7 +115,7 @@ namespace Bank2
                 {
                     MainMenu obj = new MainMenu();
                     obj.Show();
-                    Hide();
+                    this.Hide();
                 }
                 else
                 {
@@ -147,6 +147,18 @@ namespace Bank2
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                txtPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                txtPassword.UseSystemPasswordChar = false;
+            }
         }
     }
 }

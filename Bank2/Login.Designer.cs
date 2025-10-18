@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             panel1 = new Panel();
+            label5 = new Label();
+            pictureBox3 = new PictureBox();
             label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
             txtUsername = new TextBox();
             txtPassword = new TextBox();
             pictureBox1 = new PictureBox();
@@ -40,12 +40,13 @@
             btnLogin = new Button();
             cbRole = new ComboBox();
             label4 = new Label();
-            pictureBox3 = new PictureBox();
-            label5 = new Label();
+            panel2 = new Panel();
+            panel3 = new Panel();
+            checkBox1 = new CheckBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -60,6 +61,30 @@
             panel1.Size = new Size(229, 600);
             panel1.TabIndex = 0;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("MS Reference Sans Serif", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label5.ForeColor = Color.AliceBlue;
+            label5.Location = new Point(22, 239);
+            label5.Name = "label5";
+            label5.Size = new Size(187, 35);
+            label5.TabIndex = 12;
+            label5.Text = "Home Bank";
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(47, 133);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(133, 111);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 11;
+            pictureBox3.TabStop = false;
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -73,42 +98,29 @@
             label1.Text = "Home Bank";
             label1.Click += label1_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.Blue;
-            label2.Location = new Point(293, 255);
-            label2.Name = "label2";
-            label2.Size = new Size(90, 25);
-            label2.TabIndex = 6;
-            label2.Text = "Usename";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.Blue;
-            label3.Location = new Point(293, 345);
-            label3.Name = "label3";
-            label3.Size = new Size(91, 25);
-            label3.TabIndex = 7;
-            label3.Text = "Password";
-            // 
             // txtUsername
             // 
+            txtUsername.BackColor = SystemColors.Control;
+            txtUsername.BorderStyle = BorderStyle.None;
             txtUsername.Location = new Point(293, 299);
             txtUsername.Margin = new Padding(3, 4, 3, 4);
+            txtUsername.Multiline = true;
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(215, 27);
+            txtUsername.PlaceholderText = "Username";
+            txtUsername.Size = new Size(226, 34);
             txtUsername.TabIndex = 8;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(293, 396);
+            txtPassword.BackColor = SystemColors.Control;
+            txtPassword.BorderStyle = BorderStyle.None;
+            txtPassword.Location = new Point(292, 361);
             txtPassword.Margin = new Padding(3, 4, 3, 4);
+            txtPassword.Multiline = true;
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(215, 27);
+            txtPassword.PasswordChar = '*';
+            txtPassword.PlaceholderText = "Password";
+            txtPassword.Size = new Size(226, 35);
             txtPassword.TabIndex = 9;
             txtPassword.TextChanged += textBox2_TextChanged;
             // 
@@ -141,6 +153,7 @@
             // btnLogin
             // 
             btnLogin.BackColor = Color.Blue;
+            btnLogin.Cursor = Cursors.Hand;
             btnLogin.FlatStyle = FlatStyle.Popup;
             btnLogin.ForeColor = Color.White;
             btnLogin.Location = new Point(341, 475);
@@ -154,19 +167,20 @@
             // 
             // cbRole
             // 
+            cbRole.Cursor = Cursors.Hand;
+            cbRole.DropDownStyle = ComboBoxStyle.DropDownList;
             cbRole.FormattingEnabled = true;
-            cbRole.Items.AddRange(new object[] { "Agent", "Admin" });
             cbRole.Location = new Point(393, 216);
             cbRole.Margin = new Padding(3, 4, 3, 4);
             cbRole.Name = "cbRole";
             cbRole.Size = new Size(138, 28);
             cbRole.TabIndex = 13;
-            cbRole.Text = "Role";
             cbRole.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.Cursor = Cursors.Hand;
             label4.Font = new Font("MS Reference Sans Serif", 12F, FontStyle.Underline, GraphicsUnit.Point);
             label4.Location = new Point(370, 544);
             label4.Name = "label4";
@@ -175,35 +189,40 @@
             label4.Text = "Reset";
             label4.Click += label4_Click;
             // 
-            // pictureBox3
+            // panel2
             // 
-            pictureBox3.BackColor = Color.Transparent;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(47, 133);
-            pictureBox3.Margin = new Padding(3, 4, 3, 4);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(133, 111);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 11;
-            pictureBox3.TabStop = false;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Location = new Point(293, 332);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(230, 1);
+            panel2.TabIndex = 15;
             // 
-            // label5
+            // panel3
             // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("MS Reference Sans Serif", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label5.ForeColor = Color.AliceBlue;
-            label5.Location = new Point(22, 239);
-            label5.Name = "label5";
-            label5.Size = new Size(187, 35);
-            label5.TabIndex = 12;
-            label5.Text = "Home Bank";
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Location = new Point(292, 395);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(230, 1);
+            panel3.TabIndex = 16;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(501, 372);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(18, 17);
+            checkBox1.TabIndex = 44;
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(701, 600);
+            Controls.Add(checkBox1);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
             Controls.Add(label4);
             Controls.Add(cbRole);
             Controls.Add(btnLogin);
@@ -211,8 +230,6 @@
             Controls.Add(pictureBox1);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
-            Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -223,9 +240,9 @@
             Load += Login_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -234,8 +251,6 @@
 
         private Panel panel1;
         private Label label1;
-        private Label label2;
-        private Label label3;
         private TextBox txtUsername;
         private TextBox txtPassword;
         private PictureBox pictureBox1;
@@ -245,5 +260,8 @@
         private Label label4;
         private Label label5;
         private PictureBox pictureBox3;
+        private Panel panel2;
+        private Panel panel3;
+        private CheckBox checkBox1;
     }
 }
